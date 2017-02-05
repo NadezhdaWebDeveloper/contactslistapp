@@ -1,11 +1,40 @@
-var express = require('express');
-var app = express();
-var mongojs = require('mongojs');
-var db = mongojs('contactlist', ['contactlist']);
-var bodyParser = require('body-parser');
+var express 	= require('express');
+var app 		= express();
+var port 		= process.env.PORT || 3000;
+var morgan 		= require('morgan'); //middleware
+var assert 		= require('assert');
+var mongoose	= require('mongoose');
+var mongojs 	= require('mongojs');
+var db 			= mongojs('contactlist', ['contactlist']);
+var bodyParser 	= require('body-parser');
+var router 		= express.Router();
+var appRoutes	= require('./app/routes/api')(router);
+var path 		= require('path');
 
+// db coonection
+mongoose.Promise = require('bluebird');
+mongoose.connect('mongodb://localhost:27017/usersdb', function(err){
+	if (err) {
+		console.log('Not connected to the database: ' + err);
+	} else {
+		console.log('Successfully connected to MongoDB');
+	}
+});
+
+// middleware
+app.use(morgan('dev')); 							// 1 Start login or request
+app.use(bodyParser.json());							// 2 Start parsing the data
+app.use(bodyParser.urlencoded({ extended: true })); // 2 --//--
 app.use(express.static(__dirname + "/public"));
-app.use(bodyParser.json());
+app.use('/api', appRoutes);							// 3 Use the routes
+//	    '/api' - for backend routes
+
+// Перенаправление на index.html что бы не ввел пользователь
+// app.get('*', function(req, res){
+// 	res.sendFile(path.join(__dirname + "/public/index.html"));
+// });
+
+
 
 // Получение списка с записями
 app.get('/contactlist', function(req, res){
@@ -63,5 +92,6 @@ app.put('/contactlist/:id', function(req, res){
 	});
 });
 
-app.listen(3000);
-console.log("Server running on port 3000");
+app.listen(port, function(){
+	console.log("Server running on port " + port);
+});

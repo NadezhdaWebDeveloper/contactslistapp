@@ -1,5 +1,5 @@
-var myApp = angular.module('myApp', ['ngRoute'])
-	.config(function($routeProvider, $locationProvider){
+var myApp = angular.module('myApp', ['ngRoute', 'userServices', 'ngAnimate', 'authServices'])
+	.config(function($routeProvider, $locationProvider, $httpProvider){
 		$routeProvider
 		.when('/list',
 		{
@@ -14,25 +14,119 @@ var myApp = angular.module('myApp', ['ngRoute'])
 		.when('/auth',
 		{
 			templateUrl: 'views/auth.html',
-			controller: 'AppCtrl'
+			controller: 'mainCtrl',
+			controllerAs: 'loginCtrl'
 		})
 		.when('/registration',
 		{
 			templateUrl: 'views/registration.html',
-			controller: 'AppCtrl'
+			controller: 'regCtrl',
+			controllerAs: 'register'
 		})
 		.otherwise({ redirectTo: '/' });
 
+		// $httpProvider.interceptors.push('AuthInterceptors');
+
 		// Delete hash from URL
-		$locationProvider.html5Mode({
-			enabled: true,
-			requireBase: false
-		});
+			// $locationProvider.html5Mode({
+			// 	enabled: true,
+			// 	requireBase: false
+			// });
+
 	});
 
-myApp.controller("AppCtrl", function ($scope, $http) {
+myApp.config(['$locationProvider', function($locationProvider) {
+	$locationProvider.hashPrefix('');
+}]);
+
+
+myApp.controller("regCtrl", function ($http, $location, $timeout, User, Auth) {
+	var app = this;
+
+	if (Auth.isLoggedIn()) {
+		console.log('Success! User is logged in!');
+		// Auth.getUser().then(function(data){
+		// 	console.log(data);
+		// });
+	} else {
+		console.log('Error! User is not logged in!');
+	}
+
+	this.regUser = function(regData) {
+		app.errorMsg = false;
+		app.loading = true;
+
+		User.create(app.regData).then(function successCallback(data) {
+			app.loading = false;
+			if(data.data.success){
+				app.successMsg = data.data.message + ' And you will have be redirecting';
+				$timeout(function(){
+					$location.path('/auth');
+				}, 2000);
+			}else{
+				app.errorMsg = data.data.message;
+			}
+		}, function errorCallback(data) {
+			console.log('errorCallback');
+			console.log(data.data.success);
+		});
+	}
+});
+
+
+myApp.controller("mainCtrl", function ($http, $location, $timeout, Auth) {
+	var app = this;
+	var isLoggedIn = Auth.isLoggedIn();
+
+	if (Auth.isLoggedIn()) {
+		console.log('Success! User is logged in!');
+		// Auth.getUser().then(function(data){
+		// 	console.log(data);
+		// });
+	} else {
+		console.log('Error! User is not logged in!');
+	}
+
+	this.loginUser = function(loginData) {
+		app.errorMsg = false;
+		app.loading = true;
+
+		Auth.login(app.loginData).then(function successCallback(data) {
+			app.loading = false;
+			if(data.data.success){
+				app.successMsg = data.data.message + ' And you will have be redirecting at home page';
+				$timeout(function(){
+					$location.path('/list');
+				}, 2000);
+			}else{
+				app.errorMsg = data.data.message;
+			}
+		}, function errorCallback(data) {
+			console.log('errorCallback');
+			console.log(data.data.success);
+		});
+	}
+
+	this.logoutUser = function(){
+		console.log('User logout');
+		Auth.logout();
+		$location.path('/');
+	}
+});
+
+
+
+
+myApp.controller("AppCtrl", function ($scope, $http, Auth) {
 	
-	// console.log("Hello from Controller!");
+	if (Auth.isLoggedIn()) {
+		console.log('Success! User is logged in!');
+		// Auth.getUser().then(function(data){
+		// 	console.log(data);
+		// });
+	} else {
+		console.log('Error! User is not logged in!');
+	}
 
 	var refresh = function(){
 		$http({
@@ -58,7 +152,6 @@ myApp.controller("AppCtrl", function ($scope, $http) {
 		$http.post('/contactlist', $scope.contact).then(function successCallback(response) {
 			// this callback will be called asynchronously
 			// when the response is available
-			console.log(response);
 
 			$scope.contact = null;
 
@@ -78,7 +171,6 @@ myApp.controller("AppCtrl", function ($scope, $http) {
 		$http.delete('/contactlist/' + id).then(function successCallback(response) {
 			// this callback will be called asynchronously
 			// when the response is available
-			console.log(response);
 			
 			refresh();
 
@@ -94,7 +186,6 @@ myApp.controller("AppCtrl", function ($scope, $http) {
 		$http.get('/contactlist/' + id).then(function successCallback(response) {
 			// this callback will be called asynchronously
 			// when the response is available
-			console.log(response);
 
 			$scope.contact = response.data;
 
@@ -105,12 +196,10 @@ myApp.controller("AppCtrl", function ($scope, $http) {
 	}
 
 	$scope.updateContact = function(){
-		console.log($scope.contact._id);
 
 		$http.put('/contactlist/' + $scope.contact._id, $scope.contact).then(function successCallback(response) {
 			// this callback will be called asynchronously
 			// when the response is available
-			console.log(response);
 
 			refresh();
 
