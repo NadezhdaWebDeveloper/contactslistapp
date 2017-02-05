@@ -1,20 +1,34 @@
 var myApp = angular.module('myApp', ['ngRoute'])
-	.config(function($routeProvider){
-		$routeProvider.when('/list',
+	.config(function($routeProvider, $locationProvider){
+		$routeProvider
+		.when('/list',
 		{
 			templateUrl: 'views/contact_list.html',
 			controller: 'AppCtrl'
-		});
-		$routeProvider.when('/form',
+		})
+		.when('/form',
 		{
 			templateUrl: 'views/form_create_edit.html',
 			controller: 'AppCtrl'
+		})
+		.when('/auth',
+		{
+			templateUrl: 'views/auth.html',
+			controller: 'AppCtrl'
+		})
+		.when('/registration',
+		{
+			templateUrl: 'views/registration.html',
+			controller: 'AppCtrl'
+		})
+		.otherwise({ redirectTo: '/' });
+
+		// Delete hash from URL
+		$locationProvider.html5Mode({
+			enabled: true,
+			requireBase: false
 		});
 	});
-
-myApp.config(['$locationProvider', function($locationProvider) {
-	$locationProvider.hashPrefix('');
-}]);
 
 myApp.controller("AppCtrl", function ($scope, $http) {
 	
