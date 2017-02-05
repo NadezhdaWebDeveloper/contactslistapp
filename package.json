@@ -1,0 +1,28 @@
+{
+  "name": "contactslistapp",
+  "version": "1.0.0",
+  "description": "Simple SPA",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1",
+    "mongojs": "^2.4.0",
+    "mongodb": "*",
+    "mongoose": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NadezhdaWebDeveloper/contactslistapp.git"
+  },
+  "author": "Nadezhda Kovaleva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NadezhdaWebDeveloper/contactslistapp/issues"
+  },
+  "homepage": "https://github.com/NadezhdaWebDeveloper/contactslistapp#readme"
+}

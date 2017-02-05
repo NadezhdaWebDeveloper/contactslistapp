@@ -11,28 +11,6 @@ app.use(bodyParser.json());
 app.get('/contactlist', function(req, res){
 	console.log("I received a GET request");
 
-	// person1 = {
-	// 	name: 'Tim',
-	// 	email: 'tim@gmail.com',
-	// 	number: '(111) 111-1111'
-	// };
-
-	// person2 = {
-	// 	name: 'Jack',
-	// 	email: 'jack@gmail.com',
-	// 	number: '(222) 222-2222'
-	// };
-
-	// person3 = {
-	// 	name: 'Bob',
-	// 	email: 'bob@gmail.com',
-	// 	number: '(333) 333-3333'
-	// };
-
-	// var contactlist = [person1, person2, person3];
-
-	// res.json(contactlist);
-
 	db.contactlist.find(function(err, docs){
 		console.log(docs);
 		res.json(docs);
