@@ -46,24 +46,23 @@
 	<div class="container">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
-				<!-- ng-show="loginCtrl.isLoggedIn" -->
-				<div class="navbar-header" ng-show="loginCtrl.isLoggedIn">
-					<!-- <a class="navbar-brand" href="#"></a> -->
-					<ul class="nav navbar-nav">
-						<li><a href="#/list">Contacts list</a></li>
-						<li><a href="#/form">Add/Edit contacts list</a></li>
-					</ul>
+				<div class="row">
+					<div class="navbar-header" ng-show="loginCtrl.isLoggedIn">
+						<ul class="nav navbar-nav">
+							<li><a href="#/profile">Hello {{ loginCtrl.username }}</a>!</li>
+							<li><a href="#/list">Contacts list</a></li>
+							<li><a href="#/form">Add/Edit contacts list</a></li>
+						</ul>
+					</div>
+					<div id="navbar" class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li><a href="#/">Home</a></li>
+							<li><a href="#/auth" ng-show="!loginCtrl.isLoggedIn">Log in</a></li>
+							<li><a href="#" ng-show="loginCtrl.isLoggedIn" ng-click="loginCtrl.logoutUser();">Log out</a></li>
+							<li><a href="#/registration" ng-show="!loginCtrl.isLoggedIn">Register</a></li>
+						</ul>
+					</div><!--/.nav-collapse -->
 				</div>
-				<div id="navbar" class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
-						<!-- <li><a href="#/list">Contacts list</a></li>
-						<li><a href="#/form">Add/Edit contacts list</a></li> -->
-						<li><a href="#/">Home</a></li>
-						<li><a href="#/auth">Log in</a></li>
-						<li><a href="#" ng-click="loginCtrl.logoutUser();">Log out</a></li>
-						<li><a href="#/registration">Register</a></li>
-					</ul>
-				</div><!--/.nav-collapse -->
 			</div>
 		</nav>
 

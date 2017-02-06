@@ -55,7 +55,7 @@ module.exports = function(router){
 			});
 	});
 
-
+	// TO TAKE A TOKEN AND VERIFY HIM
 	router.use(function(req, res, next){
 		var token = req.body.token || req.body.query || req.headers['x-access-token'];
 

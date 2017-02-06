@@ -1,4 +1,4 @@
-angular.module('appRoutes', ['ngRoute'])
+var app = angular.module('appRoutes', ['ngRoute'])
 
 .config(function($routeProvider, $locationProvider, $httpProvider){
 	$routeProvider
@@ -7,26 +7,36 @@ angular.module('appRoutes', ['ngRoute'])
 		templateUrl: 'views/home.html'
 	})
 
+	.when('/profile', {
+		templateUrl: 'views/contact_list.html',
+		controller: 'AppCtrl',
+		authenticated: true
+	})
+
 	.when('/list', {
 		templateUrl: 'views/contact_list.html',
-		controller: 'AppCtrl'
+		controller: 'AppCtrl',
+		authenticated: true
 	})
 
 	.when('/form', {
 		templateUrl: 'views/form_create_edit.html',
-		controller: 'AppCtrl'
+		controller: 'AppCtrl',
+		authenticated: true
 	})
 
 	.when('/auth', {
 		templateUrl: 'views/auth.html',
 		controller: 'mainCtrl',
-		controllerAs: 'loginCtrl'
+		controllerAs: 'loginCtrl',
+		authenticated: false
 	})
 
 	.when('/registration', {
 		templateUrl: 'views/registration.html',
 		controller: 'regCtrl',
-		controllerAs: 'register'
+		controllerAs: 'register',
+		authenticated: false
 	})
 
 	.otherwise({ redirectTo: '/' });
@@ -40,3 +50,24 @@ angular.module('appRoutes', ['ngRoute'])
 	$locationProvider.hashPrefix('');
 
 });
+
+app.run(['$rootScope', 'Auth', '$location', function($rootScope, Auth, $location){
+
+	$rootScope.$on('$routeChangeStart', function(event, next, current){
+		if (next.$$route.authenticated == true){
+			
+			if (!Auth.isLoggedIn()) {
+				event.preventDefault();
+				$location.path('/');
+			}
+
+		} else if (next.$$route.authenticated == false){
+			
+			if (Auth.isLoggedIn()) {
+				event.preventDefault();
+				$location.path('/profile');
+			}
+		}
+	});
+
+}]);

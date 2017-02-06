@@ -1,19 +1,22 @@
 angular.module('mainController', [])
 
-.controller("mainCtrl", function ($http, $location, $timeout, Auth) {
+.controller("mainCtrl", function ($http, $location, $timeout, Auth, $rootScope) {
 	var app = this;
-	var isLoggedIn = false;
 
-	if (Auth.isLoggedIn()) {
-		console.log('Success! User is logged in!');
-		isLoggedIn = true;
+	$rootScope.$on('$routeChangeStart', function(){
+		if (Auth.isLoggedIn()) {
+			console.log('User is logged in!');
+			app.isLoggedIn = true;
 
-		Auth.getUser().then(function(data){
-			console.log(data);
-		});
-	} else {
-		console.log('User is not logged in!');
-	}
+			Auth.getUser().then(function(data){
+				app.username = data.data.username;
+			});
+		} else {
+			app.username = '';
+			app.isLoggedIn = false;
+			console.log('User is not logged in!');
+		}
+	});
 
 	this.loginUser = function(loginData) {
 		app.errorMsg = false;
@@ -22,12 +25,13 @@ angular.module('mainController', [])
 		Auth.login(app.loginData).then(function successCallback(data) {
 			app.loading = false;
 			if(data.data.success){
-				isLoggedIn = true;
-				console.log(isLoggedIn);
+				app.isLoggedIn = true;
 
 				app.successMsg = data.data.message + ' And you will have be redirecting at home page';
 				$timeout(function(){
 					$location.path('/list');
+					app.loginData = '';
+					app.successMsg = false;
 				}, 2000);
 			}else{
 				app.errorMsg = data.data.message;
