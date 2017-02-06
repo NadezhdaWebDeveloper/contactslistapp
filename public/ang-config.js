@@ -7,7 +7,8 @@ angular.module('spaApp',
 		'ngAnimate',
 		'mainController',
 		'authServices',
-		'myApp'
+		'myApp',
+		'createListController'
 	])
 
 .config(function($httpProvider){

@@ -21,7 +21,7 @@ var app = angular.module('appRoutes', ['ngRoute'])
 
 	.when('/form', {
 		templateUrl: 'views/form_create_edit.html',
-		controller: 'AppCtrl',
+		controller: 'createCtrl',
 		authenticated: true
 	})
 

@@ -16,10 +16,20 @@
 			<td><input class="form-control" ng-model="contact.name"></td>
 			<td><input class="form-control" ng-model="contact.email"></td>
 			<td><input class="form-control" ng-model="contact.number"></td>
-			<td><button class="btn btn-success" ng-click="addContact()">Add Contact</button></td>
+			<td><button class="btn btn-success" ng-click="addContact();">Add Contact</button></td>
 			<td>
-				<button class="btn btn-info" ng-click="updateContact()">Update</button>
+				<button class="btn btn-info" ng-click="updateContact();">Update</button>
 			</td>
+		</tr>
+		<tr ng-repeat="contact in newlistdb">
+			<td>{{contact.name}}</td>
+			<td>{{contact.email}}</td>
+			<td>{{contact.number}}</td>
+			<td><button class="btn btn-danger" ng-click="removeContact(contact._id);">Remove</button></td>
+			<td><button class="btn btn-warning" ng-click="editContact(contact._id);">Edit</button></td>
+		</tr>
+		<tr>
+			<td colspan="5"><button class="btn btn-primary" ng-click="uploadContactslist();">Edit</button></td>
 		</tr>
 	</tbody>
 </table>
