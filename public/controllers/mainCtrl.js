@@ -24,7 +24,6 @@ angular.module('mainController', [])
 		app.loading = true;
 
 		Auth.login(app.loginData).then(function successCallback(data) {
-			app.loading = false;
 			if(data.data.success){
 				app.isLoggedIn = true;
 
@@ -41,7 +40,6 @@ angular.module('mainController', [])
 			console.log('errorCallback');
 			console.log(data.data.success);
 		});
-		console.log(app.isLoggedIn);
 	}
 
 	this.logoutUser = function(){

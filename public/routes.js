@@ -4,9 +4,7 @@ var app = angular.module('appRoutes', ['ngRoute'])
 	$routeProvider
 
 	.when('/', {
-		templateUrl: 'views/home.html',
-		controller: 'mainCtrl',
-		controllerAs: 'loginCtrl'
+		templateUrl: 'views/home.html'
 	})
 
 	.when('/profile', {
@@ -69,6 +67,9 @@ app.run(['$rootScope', 'Auth', '$location', function($rootScope, Auth, $location
 				event.preventDefault();
 				$location.path('/profile');
 			}
+
+		} else{
+			$location.path('/');
 		}
 	});
 
