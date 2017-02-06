@@ -1,16 +1,17 @@
 <div class="page-header">
-	<h1 class="text-center">Welcome<span class="text-capitalize text-danger">, <strong>{{loginCtrl.username }}</strong>,</span> to my SPA!</h1>
+	<h1 class="text-center">Welcome<span ng-show="loginCtrl.isLoggedIn">, </span><span class="text-capitalize text-danger"><strong>{{loginCtrl.username }}</strong></span><span ng-show="loginCtrl.isLoggedIn">, </span> to my SPA!</h1>
 </div>
 
 <div ng-show="loginCtrl.isLoggedIn">
 <div class="jumbotron text-center">
-	<div class="btn-group" role="group"><a class="btn btn-primary" href="#/list">Contacts list</a></div>
-	<div class="btn-group" role="group"><a class="btn btn-success" href="#/form">Add/Edit contacts list</a></div>
+	<div class="btn-group" role="group"><a class="btn btn-lg btn-primary" href="#/list">Contacts list</a></div>
+	<div class="btn-group" role="group"><a class="btn btn-lg btn-success" href="#/form">Add/Edit contacts list</a></div>
 </div>
 </div>
 <div ng-show="!loginCtrl.isLoggedIn">
 <div class="jumbotron text-center">
-	<div class="btn-group" role="group"><a class="btn btn-primary" href="#/auth">Log In</a></div>
-	<div class="btn-group" role="group"><a class="btn btn-info" href="#/registration">Register</a></div>
+	<h2 class="custom_msg">If you want to see or create your contact list you need to sign in or to sign up</h2>
+	<div class="btn-group" role="group"><a class="btn btn-lg btn-primary" href="#/auth">Log In</a></div>
+	<div class="btn-group" role="group"><a class="btn btn-lg btn-info" href="#/registration">Register</a></div>
 </div>
 </div>

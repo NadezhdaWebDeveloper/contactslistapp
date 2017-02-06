@@ -7,12 +7,6 @@ var app = angular.module('appRoutes', ['ngRoute'])
 		templateUrl: 'views/home.html'
 	})
 
-	.when('/profile', {
-		templateUrl: 'views/contact_list.html',
-		controller: 'AppCtrl',
-		authenticated: true
-	})
-
 	.when('/list', {
 		templateUrl: 'views/contact_list.html',
 		controller: 'AppCtrl',
@@ -21,7 +15,7 @@ var app = angular.module('appRoutes', ['ngRoute'])
 
 	.when('/form', {
 		templateUrl: 'views/form_create_edit.html',
-		controller: 'createCtrl',
+		controller: 'AppCtrl',
 		authenticated: true
 	})
 

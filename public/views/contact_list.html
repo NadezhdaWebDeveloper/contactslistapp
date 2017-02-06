@@ -1,14 +1,16 @@
 <div class="page-header">
 	<h1 class="text-center">Contacts list</h1>
 </div>
-<div class="jumbotron text-center"">
-	<div class="btn-group" role="group"><a class="btn btn-primary" href="#/list">Contacts list</a></div>
-	<div class="btn-group" role="group"><a class="btn btn-success" href="#/form">Add/Edit contacts list</a></div>
+<div class="jumbotron text-center">
+	<div class="btn-group" role="group" ng-show="!errMsg"><a class="btn btn-lg btn-success" href="#/form">Add/Edit contacts list</a></div>
+	<div class="row show-hide-message" ng-show="errMsg">
+		<div class="alert alert-danger">{{ errMsg }}</div>
+	</div>
 </div>
-
 <table class="table">
 	<thead>
-		<tr>
+		<tr class="info">
+			<th>№</th>
 			<th>Name</th>
 			<th>Email</th>
 			<th>Number</th>
@@ -17,18 +19,20 @@
 	</thead>
 	<tbody>
 		<tr>
+			<td></td>
 			<td><input class="form-control" ng-model="contact.name"></td>
 			<td><input class="form-control" ng-model="contact.email"></td>
 			<td><input class="form-control" ng-model="contact.number"></td>
-			<td><button class="btn btn-success" ng-click="addContact()">Add Contact</button></td>
-			<td><button class="btn btn-info" ng-click="updateContact()">Update</button></td>
+			<td><button class="btn btn-success" ng-click="addContact();">Add Contact</button></td>
+			<td><button class="btn btn-info" ng-click="updateContact();">Update</button></td>
 		</tr>
-		<tr ng-repeat="contact in contactlist">
+		<tr ng-repeat="(key, contact) in contactlist">
+			<td>{{key + 1}}</td>
 			<td>{{contact.name}}</td>
 			<td>{{contact.email}}</td>
 			<td>{{contact.number}}</td>
-			<td><button class="btn btn-danger" ng-click="removeContact(contact._id)">Remove</button></td>
-			<td><button class="btn btn-warning" ng-click="editContact(contact._id)">Edit</button></td>
+			<td><button class="btn btn-danger" ng-click="removeContact(contact._id);">Remove</button></td>
+			<td><button class="btn btn-warning" ng-click="editContact(contact._id);">Edit</button></td>
 		</tr>
 	</tbody>
 </table>

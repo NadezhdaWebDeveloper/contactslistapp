@@ -1,6 +1,6 @@
-var User 		= require('../models/user');
-var jwt			= require('jsonwebtoken');
-var secret 		= 'homersimpson';
+var User 		= require('../models/user'),
+	jwt			= require('jsonwebtoken'),
+	secret 		= 'homersimpson';
 
 module.exports = function(router){
 
@@ -16,12 +16,12 @@ module.exports = function(router){
 		if (req.body.username == null || req.body.username == ''
 			|| req.body.userpswd == null || req.body.userpswd == ''
 			|| req.body.useremail == null || req.body.useremail == '') {
-			res.json({ success: false, message: 'Ensure username, userpswd and useremail were provided' });
+			res.json({ success: false, message: 'Ensure username, userpswd and useremail were provided.' });
 		} else {
 			user.save(function(err){
 				if (err) {
 					// res.send('We have an error: ' + err.errmsg);
-					res.json({ success: false, message: 'Username or Email already exist!' });
+					res.json({ success: false, message: 'Username or Email already exist! Try again.' });
 				} else {
 					res.json({ success: true, message: 'User created!' });
 				}
@@ -48,7 +48,7 @@ module.exports = function(router){
 					if (!validPassword) {
 						res.json({ success: false, message: 'Could not authenticate password!' });
 					} else {
-						var token = jwt.sign({ username: user.username, useremail: user.useremail }, secret, { expiresIn: '1h' });
+						var token = jwt.sign({ username: user.username, useremail: user.useremail }, secret, { expiresIn: '24h' });
 						res.json({ success: true, message: 'Welcome!', token: token });
 					}
 				}

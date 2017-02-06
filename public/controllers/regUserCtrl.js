@@ -10,6 +10,7 @@ angular.module('regUserController', [])
 		User.create(app.regData).then(function successCallback(data) {
 			app.loading = false;
 			if(data.data.success){
+				app.errorMsg = false;
 				app.successMsg = data.data.message + ' And you will have be redirecting';
 				$timeout(function(){
 					$location.path('/auth');
