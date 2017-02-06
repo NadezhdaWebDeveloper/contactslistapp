@@ -4,7 +4,9 @@ var app = angular.module('appRoutes', ['ngRoute'])
 	$routeProvider
 
 	.when('/', {
-		templateUrl: 'views/home.html'
+		templateUrl: 'views/home.html',
+		controller: 'mainCtrl',
+		controllerAs: 'loginCtrl'
 	})
 
 	.when('/profile', {

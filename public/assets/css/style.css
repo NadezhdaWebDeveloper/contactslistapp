@@ -1,5 +1,5 @@
 main 					{
-	padding-top:30px;	
+	padding-top: 30px;	
 }
 
 /* HEADER 
@@ -40,3 +40,7 @@ header .navbar 		{
 	from 	{ -moz-transform:rotate(0deg); }	
 	to 	{ -moz-transform:rotate(360deg); }
 }
+
+
+th{ text-align: center; }
+td button{ min-width: 110px; }

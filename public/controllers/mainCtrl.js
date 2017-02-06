@@ -16,6 +16,7 @@ angular.module('mainController', [])
 			app.isLoggedIn = false;
 			// console.log('User is not logged in!');
 		}
+		console.log(app.isLoggedIn);
 	});
 
 	this.loginUser = function(loginData) {
@@ -40,6 +41,7 @@ angular.module('mainController', [])
 			console.log('errorCallback');
 			console.log(data.data.success);
 		});
+		console.log(app.isLoggedIn);
 	}
 
 	this.logoutUser = function(){

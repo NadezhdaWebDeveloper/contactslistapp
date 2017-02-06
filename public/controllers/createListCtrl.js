@@ -3,8 +3,6 @@ angular.module('createListController', [])
 .controller("createCtrl", function ($scope, $http) {
 	var app = this;
 
-	console.log('Hello from createCtrl');
-
 	var refresh = function(){
 		$http({
 			method: 'GET',

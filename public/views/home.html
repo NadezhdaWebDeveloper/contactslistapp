@@ -1,3 +1,12 @@
 <div class="page-header">
-	<h1>Hello {{ loginCtrl.username }}!</h1>
+	<h1 class="text-center">Welcome <span ng-show="loginCtrl.isLoggedIn">,</span> {{ loginCtrl.username }}<span ng-show="loginCtrl.isLoggedIn">,</span>to my SPA!</h1>
+</div>
+
+<div class="jumbotron text-center" ng-show="loginCtrl.isLoggedIn">
+	<div class="btn-group" role="group"><a class="btn btn-primary" href="#/list">Contacts list</a></div>
+	<div class="btn-group" role="group"><a class="btn btn-success" href="#/form">Add/Edit contacts list</a></div>
+</div>
+<div class="jumbotron text-center" ng-show="!loginCtrl.isLoggedIn">
+	<div class="btn-group" role="group"><a class="btn btn-primary" href="#/auth">Log In</a></div>
+	<div class="btn-group" role="group"><a class="btn btn-info" href="#/registration">Register</a></div>
 </div>
