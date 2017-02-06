@@ -25,15 +25,14 @@ mongoose.connect('mongodb://localhost:27017/usersdb', function(err){
 app.use(morgan('dev')); 							// 1 Start login or request
 app.use(bodyParser.json());							// 2 Start parsing the data
 app.use(bodyParser.urlencoded({ extended: true })); // 2 --//--
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public/"));
 app.use('/api', appRoutes);							// 3 Use the routes
 //	    '/api' - for backend routes
 
 // Перенаправление на index.html что бы не ввел пользователь
 // app.get('*', function(req, res){
-// 	res.sendFile(path.join(__dirname + "/public/index.html"));
+// 	res.sendFile(path.join(__dirname + "views/home.html"));
 // });
-
 
 
 // Получение списка с записями

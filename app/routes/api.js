@@ -33,7 +33,7 @@ module.exports = function(router){
 	// http://localhost:3000/api/authenticate
 	router.post('/authenticate', function(req, res){
 		User.findOne({ username: req.body.username })
-			.select('username, userpswd and useremail')
+			.select('username userpswd useremail')
 			.exec(function(err, user){
 				if (err) throw err;
 
@@ -48,7 +48,7 @@ module.exports = function(router){
 					if (!validPassword) {
 						res.json({ success: false, message: 'Could not authenticate password!' });
 					} else {
-						var token = jwt.sign({ username: user.username, email: user.useremail }, secret, { expiresIn: '24h' });
+						var token = jwt.sign({ username: user.username, useremail: user.useremail }, secret, { expiresIn: '24h' });
 						res.json({ success: true, message: 'Welcome!', token: token });
 					}
 				}
@@ -65,7 +65,6 @@ module.exports = function(router){
 				if (err) {
 					res.json({ success: false, message: 'Token invalid' });
 				} else {
-					// res.json({ success: true, message: 'Have done' });
 					req.decoded = decoded;
 					next();
 				}

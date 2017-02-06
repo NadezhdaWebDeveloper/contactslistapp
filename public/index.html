@@ -1,7 +1,7 @@
 <!DOCTYPE>
-<html lang="en" ng-app="myApp">
+<html lang="en">
 <head>
-	<!-- <base href="/"> -->
+	<base href="/">
 
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,19 @@
 	<link rel="stylesheet" href="assets/css/animate.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+	<script src="assets/js/angular-route.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
+
+	<script src="ang-config.js"></script>
+	<script src="routes.js"></script>
+
+	<script src="controllers/regUserCtrl.js"></script>
+	<script src="controllers/mainCtrl.js"></script>
+	<script src="controllers/controller.js"></script>
+
+	<script src="services/userServices.js"></script>
+	<script src="services/authServices.js"></script>
 
 	<meta charset="UTF-8">
 	<title>Contact List App</title>
@@ -28,19 +41,26 @@
 		button{ min-width: 110px; }
 	</style>
 </head>
-<body>
-	<div class="container" ng-controller="mainCtrl as main">
+<body ng-app="spaApp" ng-controller="mainCtrl as loginCtrl">
+
+	<div class="container">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#"></a>
+				<!-- ng-show="loginCtrl.isLoggedIn" -->
+				<div class="navbar-header" ng-show="loginCtrl.isLoggedIn">
+					<!-- <a class="navbar-brand" href="#"></a> -->
+					<ul class="nav navbar-nav">
+						<li><a href="#/list">Contacts list</a></li>
+						<li><a href="#/form">Add/Edit contacts list</a></li>
+					</ul>
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<!-- <li><a href="#/list">Contacts list</a></li>
 						<li><a href="#/form">Add/Edit contacts list</a></li> -->
+						<li><a href="#/">Home</a></li>
 						<li><a href="#/auth">Log in</a></li>
-						<li><a href="#" ng-click="main.logoutUser();">Log out</a></li>
+						<li><a href="#" ng-click="loginCtrl.logoutUser();">Log out</a></li>
 						<li><a href="#/registration">Register</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
@@ -53,18 +73,11 @@
 				<h2>Contact List</h2>
 			</div>
 
-			<ng-view></ng-view>
+			<ng-view class="ng-scope"></ng-view>
 
 
 		</div><!-- /.container -->
 	</div>
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
-	<script src="assets/js/angular-route.min.js"></script>
-
-	<script src="controllers/controller.js"></script>
-	<script src="services/userServices.js"></script>
-	<script src="services/authServices.js"></script>
 </body>
 </html>

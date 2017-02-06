@@ -1,10 +1,11 @@
 angular.module('authServices', []) 
 
-.factory('Auth', function($http, AuthToken, $q){
+.factory('Auth', function($http, AuthToken){
 	var authFactory = {};
 
 	// Auth.login(loginData)
 	authFactory.login = function(loginData){
+
 		return $http(
 		{
 			method: 'POST',
@@ -12,9 +13,7 @@ angular.module('authServices', [])
 			data: loginData
 		}).then(function(data){
 			AuthToken.setToken(data.data.token);
-
 			return data;
-
 		});
 	}
 
@@ -30,11 +29,9 @@ angular.module('authServices', [])
 	// Auth.getUser();
 	authFactory.getUser = function(){
 		if( AuthToken.getToken() ){
-			// return 'HAS TOKEN! Hello from authFactory.getUser';
-			return $http.post('api/whois');
+			return $http.post('/api/whois');
 		} else {
-			return 'NO TOKEN! Hello from authFactory.getUser';
-			// return $q.reject({ message: 'User has no token' });
+			return $q.reject({ message: 'User has no token' });
 		}
 	}
 
@@ -73,8 +70,10 @@ angular.module('authServices', [])
 		var token = AuthToken.getToken();
 
 		if (token) {
-			сonfig.headers['x-access-token'] = token;
+			config.headers['x-access-token'] = token;
 		}
+
+		return config;
 	}
 
 	return authInterceptorsFactory;

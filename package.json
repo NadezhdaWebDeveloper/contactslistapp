@@ -4,6 +4,7 @@
   "description": "Simple SPA",
   "main": "server.js",
   "dependencies": {
+    "angular-route": "^1.6.1",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.0",
