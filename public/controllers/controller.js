@@ -6,7 +6,7 @@ angular.module('myApp', [])
 	var refresh = function(){
 		$http({
 			method: 'GET',
-			url: '/spadb'
+			url: '/contactlist'
 		}).then(
 			function successCallback(response) {
 				$scope.contactlist = response.data;
@@ -20,7 +20,7 @@ angular.module('myApp', [])
 	var reRefresh = function(){
 		$http({
 			method: 'GET',
-			url: '/spadb'
+			url: '/contactlist'
 		}).then(
 			function successCallback(response) {
 				$scope.newlistdb = response.data;
@@ -42,8 +42,8 @@ angular.module('myApp', [])
 
 	$scope.addContact = function(){
 
-		if($scope.contact != undefined && $scope.contact.name !== undefined && $scope.contact.name !== ''){
-			$http.post('/spadb', $scope.contact).then(
+		if($scope.contact != undefined && $scope.contact.name !== undefined){
+			$http.post('/contactlist', $scope.contact).then(
 				function successCallback(response) {
 					$scope.contact = null;
 					refresh();
@@ -61,7 +61,7 @@ angular.module('myApp', [])
 
 	$scope.removeContact = function(id){
 
-		$http.delete('/spadb/' + id).then(
+		$http.delete('/contactlist/' + id).then(
 			function successCallback(response) {
 				refresh();
 
@@ -71,7 +71,7 @@ angular.module('myApp', [])
 
 	$scope.editContact = function(id){
 
-		$http.get('/spadb/' + id).then(
+		$http.get('/contactlist/' + id).then(
 			function successCallback(response) {
 				$scope.contact = response.data;
 
@@ -81,7 +81,7 @@ angular.module('myApp', [])
 
 	$scope.updateThisContact = function(id){
 
-		$http.put('/spadb/' + $scope.contact._id, $scope.contact).then(
+		$http.put('/contactlist/' + $scope.contact._id, $scope.contact).then(
 			function successCallback(response) {
 				reRefresh();
 				$scope.contact = null;
@@ -93,7 +93,7 @@ angular.module('myApp', [])
 	$scope.updateContact = function(){
 
 		if($scope.contact != undefined && $scope.contact != null){
-			$http.put('/spadb/' + $scope.contact._id, $scope.contact).then(
+			$http.put('/contactlist/' + $scope.contact._id, $scope.contact).then(
 				function successCallback(response) {
 					refresh();
 					$scope.contact = null;
