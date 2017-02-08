@@ -27,13 +27,14 @@
 	<script src="ang-config.js"></script>
 	<script src="routes.js"></script>
 
-	<script src="controllers/regUserCtrl.js"></script>
-	<script src="controllers/mainCtrl.js"></script>
+	<script src="controllers/reguserctrl.js"></script>
+	<script src="controllers/mainctrl.js"></script>
 	<script src="controllers/controller.js"></script>
-	<script src="controllers/createListCtrl.js"></script>
 
-	<script src="services/userServices.js"></script>
-	<script src="services/authServices.js"></script>
+	<script src="services/userservices.js"></script>
+	<script src="services/authservices.js"></script>
+	
+	<script src="./assets/js/script.js"></script>
 </head>
 <body ng-app="spaApp" ng-controller="mainCtrl as loginCtrl">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -45,7 +46,6 @@
 							<li><a href="#/">Home</a></li>
 							<li><a href="#/auth" ng-show="!loginCtrl.isLoggedIn">Log in</a></li>
 							<li><a href="#/registration" ng-show="!loginCtrl.isLoggedIn">Register</a></li>
-							<li><a href="#/profile" ng-show="loginCtrl.isLoggedIn">Hello, <span class="text-capitalize">{{ loginCtrl.username }}</span>!</a></li>
 							<li><a href="#" ng-show="loginCtrl.isLoggedIn" ng-click="loginCtrl.logoutUser();">Log out</a></li>
 						</ul>
 					</div><!--/.nav-collapse -->

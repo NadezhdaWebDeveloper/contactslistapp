@@ -1,88 +1,105 @@
 
 angular.module('myApp', [])
 
-.controller("AppCtrl", function ($scope, $http) {
+.controller("AppCtrl", function ($scope, $http, $timeout) {
 
 	var refresh = function(){
 		$http({
 			method: 'GET',
-			url: '/contactlist'
-		}).then(function successCallback(response) {
-				// this callback will be called asynchronously
-				// when the response is available
-
+			url: '/spadb'
+		}).then(
+			function successCallback(response) {
 				$scope.contactlist = response.data;
 
-			}, function errorCallback(response) {
-				// called asynchronously if an error occurs
-				// or server returns response with an error status.
-			});
+			}, function errorCallback(response) {}
+		);
+	};
+	refresh();
+
+	
+	var reRefresh = function(){
+		$http({
+			method: 'GET',
+			url: '/spadb'
+		}).then(
+			function successCallback(response) {
+				$scope.newlistdb = response.data;
+
+			}, function errorCallback(response) {}
+		);
+	};
+
+	var marker = false;
+	
+	$scope.getAll = function(){
+		reRefresh();
+		marker = true;
 	};
 
 	refresh();
 
+	$scope.errMsg = false;
+
 	$scope.addContact = function(){
-		console.log($scope.contact);
 
-		$http.post('/contactlist', $scope.contact).then(function successCallback(response) {
-			// this callback will be called asynchronously
-			// when the response is available
+		if($scope.contact != undefined && $scope.contact.name !== undefined){
+			$http.post('/spadb', $scope.contact).then(
+				function successCallback(response) {
+					$scope.contact = null;
+					refresh();
+					if (marker) { reRefresh() }
 
-			$scope.contact = null;
-
-			refresh();
-
-			// $scope.contactlist = response.data;
-
-		}, function errorCallback(response) {
-			// called asynchronously if an error occurs
-			// or server returns response with an error status.
-		});;
+				}, function errorCallback(response) {}
+			);
+		}else{
+			$scope.errMsg = 'Name is required field! Please enter name.';
+			$timeout(function(){
+				$scope.errMsg = false;
+			}, 4000);
+		}
 	};
 
 	$scope.removeContact = function(id){
-		console.log(id);
 
-		$http.delete('/contactlist/' + id).then(function successCallback(response) {
-			// this callback will be called asynchronously
-			// when the response is available
-			
-			refresh();
+		$http.delete('/spadb/' + id).then(
+			function successCallback(response) {
+				refresh();
 
-		}, function errorCallback(response) {
-			// called asynchronously if an error occurs
-			// or server returns response with an error status.
-		});;
+			}, function errorCallback(response) {}
+		);
 	};
 
 	$scope.editContact = function(id){
-		console.log(id);
 
-		$http.get('/contactlist/' + id).then(function successCallback(response) {
-			// this callback will be called asynchronously
-			// when the response is available
+		$http.get('/spadb/' + id).then(
+			function successCallback(response) {
+				$scope.contact = response.data;
 
-			$scope.contact = response.data;
+			}, function errorCallback(response) {}
+		);
+	}
 
-		}, function errorCallback(response) {
-			// called asynchronously if an error occurs
-			// or server returns response with an error status.
-		});
+	$scope.updateThisContact = function(id){
+
+		$http.put('/spadb/' + $scope.contact._id, $scope.contact).then(
+			function successCallback(response) {
+				reRefresh();
+				$scope.contact = null;
+
+			}, function errorCallback(response) {}
+		);
 	}
 
 	$scope.updateContact = function(){
 
-		$http.put('/contactlist/' + $scope.contact._id, $scope.contact).then(function successCallback(response) {
-			// this callback will be called asynchronously
-			// when the response is available
+		if($scope.contact != undefined && $scope.contact != null){
+			$http.put('/spadb/' + $scope.contact._id, $scope.contact).then(
+				function successCallback(response) {
+					refresh();
+					$scope.contact = null;
 
-			refresh();
-
-			$scope.contact = null;
-
-		}, function errorCallback(response) {
-			// called asynchronously if an error occurs
-			// or server returns response with an error status.
-		});
+				}, function errorCallback(response) {}
+			);
+		}
 	}
 });

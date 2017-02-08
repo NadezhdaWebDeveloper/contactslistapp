@@ -8,8 +8,14 @@ header .navbar 		{
 	border-radius:0;
 }
 
+.jumbotron{ min-height: 180px; }
+
 /* NGANIMATE
 ====================== */
+.show-hide-message{
+	max-width: 600px;
+	margin: 0 auto;
+}
 
 /* show and hide */
 .show-hide-message.ng-hide-remove {
@@ -42,5 +48,12 @@ header .navbar 		{
 }
 
 
+.hidden{display: none;}
 th{ text-align: center; }
-td button{ min-width: 110px; }
+td button{ min-width: 110px; margin: 0 auto;}
+
+tr .show_update{ visibility: hidden; }
+tbody.checkedRow .show_update{ visibility: visible; }
+
+form{width: 500px; margin: 0 auto;}
+h2.custom_msg{max-width: 400px; margin: 20px auto;}
