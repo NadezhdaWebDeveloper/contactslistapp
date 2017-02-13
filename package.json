@@ -1,7 +1,7 @@
 {
   "name": "contactslistapp",
   "version": "1.0.0",
-  "description": "Simple SPA",
+  "description": "Full-stack Web Application in JavaScript, using a MongoDB, ExpressJS, NodeJS as a Rest Api and using AngularJS",
   "main": "server.js",
   "dependencies": {
     "angular-route": "^1.6.1",
