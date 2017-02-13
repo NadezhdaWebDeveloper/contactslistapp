@@ -29,7 +29,7 @@
 			<td><input class="form-control" ng-model="contact.number"></td>
 			<td class="text-center">
 				<button ng-show="!showUpdate" class="btn btn-success" ng-click="createContact();">Add Contact</button>
-				<button ng-show="showUpdate" class="btn btn-info show_update" onclick="Updated(this);" ng-click="updateContact();">Update</button>
+				<button ng-show="showUpdate" class="btn btn-info" ng-click="updateContact();">Update</button>
 			</td>
 		</tr>
 		<tr ng-repeat="(key, contact) in newlistdb">
@@ -37,10 +37,10 @@
 			<td>{{contact.name}}</td>
 			<td>{{contact.email}}</td>
 			<td>{{contact.number}}</td>
-			<td class="text-center"><button class="btn btn-warning" onclick="Editing(this);" ng-click="editContact(contact._id);">Edit</button></td>
+			<td class="text-center"><button class="btn btn-warning" ng-click="editContact(contact._id);">Edit</button></td>
 		</tr>
 		<tr class="text-center">
-			<td colspan="5"><button class="btn btn-primary btn-block" onclick="GetAll(this);" ng-click="getAll();">Get Contacts List</button></td>
+			<td colspan="5"><button ng-show="showGetAll" class="btn btn-primary btn-block" ng-click="getAll();">Get Contacts List</button></td>
 		</tr>
 	</tbody>
 </table>

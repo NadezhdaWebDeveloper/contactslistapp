@@ -6,6 +6,7 @@ angular.module('contactController', [])
 
 	$scope.errMsg = '';
 	$scope.showUpdate = false;
+	$scope.showGetAll = true;
 
 	$scope.createContact = function () {
 
@@ -52,7 +53,7 @@ angular.module('contactController', [])
 
 				$scope.contactlist = data;
 				if (marker) {
-					$scope.newlistdb = data;	
+					$scope.newlistdb = data;
 				}
 			}, function errorCallback(data) {
 				console.log('errorCallback');
@@ -64,6 +65,7 @@ angular.module('contactController', [])
 	$scope.getAll = function(){
 		getContacts();
 		marker = true;
+		$scope.showGetAll = false;
 	};
 
 	$scope.updateContact = function () {
@@ -99,8 +101,8 @@ angular.module('contactController', [])
 			.editContact(id)
 			.then(function successCallback(data) {
 				
-				$scope.contact = data;
 				$scope.showUpdate = true;
+				$scope.contact = data;
 				
 			}, function errorCallback(data) {
 				console.log('errorCallback');

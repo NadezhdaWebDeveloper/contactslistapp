@@ -5,6 +5,7 @@ var express 	= require('express'),
 	mongoose	= require('mongoose'),
 	bodyParser 	= require('body-parser'),
 	router 		= express.Router(),
+	contactsRoutes	= require('./app/routes/contacts_api')(router);
 	appRoutes	= require('./app/routes/api')(router);
 	// path 		= require('path');
 
@@ -22,6 +23,7 @@ mongoose.connect('mongodb://localhost:27017/spadb', function(err){
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public/"));
+app.use('/contacts_api', contactsRoutes);
 app.use('/api', appRoutes);
 
 
