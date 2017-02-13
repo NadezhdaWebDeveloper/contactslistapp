@@ -1,7 +1,6 @@
-Full-stack Web Application in JavaScript, using a MongoDB, ExpressJS, NodeJS as a Rest Api and using AngularJS
-
 SPA **Contacts List Application**
 =================================
+Full-stack Web Application in JavaScript, using a MongoDB, ExpressJS, NodeJS as a Rest Api and using AngularJS
 
 ### Installation
 
