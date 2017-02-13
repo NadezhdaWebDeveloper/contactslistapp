@@ -29,12 +29,11 @@
 
 	<script src="controllers/reguserctrl.js"></script>
 	<script src="controllers/mainctrl.js"></script>
-	<script src="controllers/controller.js"></script>
+	<script src="controllers/contactctrl.js"></script>
 
 	<script src="services/userservices.js"></script>
 	<script src="services/authservices.js"></script>
-	
-	<script src="./assets/js/script.js"></script>
+	<script src="services/contactservices.js"></script>
 </head>
 <body ng-app="spaApp" ng-controller="mainCtrl as loginCtrl">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -43,10 +42,10 @@
 				<div class="col-md-12">
 					<div id="navbar" class="collapse navbar-collapse">
 						<ul class="nav navbar-nav">
-							<li><a href="#/">Home</a></li>
-							<li><a href="#/auth" ng-show="!loginCtrl.isLoggedIn">Log in</a></li>
-							<li><a href="#/registration" ng-show="!loginCtrl.isLoggedIn">Register</a></li>
-							<li><a href="#" ng-show="loginCtrl.isLoggedIn" ng-click="loginCtrl.logoutUser();">Log out</a></li>
+							<li><a href="/">Home</a></li>
+							<li><a href="/auth" ng-show="!loginCtrl.isLoggedIn">Log in</a></li>
+							<li><a href="/registration" ng-show="!loginCtrl.isLoggedIn">Register</a></li>
+							<li><a href="/" ng-show="loginCtrl.isLoggedIn" ng-click="loginCtrl.logoutUser();">Log out</a></li>
 						</ul>
 					</div><!--/.nav-collapse -->
 				</div>
