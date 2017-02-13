@@ -9,13 +9,13 @@ var app = angular.module('appRoutes', ['ngRoute'])
 
 	.when('/list', {
 		templateUrl: 'views/contact_list.html',
-		controller: 'AppCtrl',
+		controller: 'contactCtrl',
 		authenticated: true
 	})
 
 	.when('/form', {
 		templateUrl: 'views/form_create_edit.html',
-		controller: 'AppCtrl',
+		controller: 'contactCtrl',
 		authenticated: true
 	})
 
@@ -36,10 +36,10 @@ var app = angular.module('appRoutes', ['ngRoute'])
 	.otherwise({ redirectTo: '/' });
 
 	// Delete hash from URL
-		// $locationProvider.html5Mode({
-		// 	enabled: true,
-		// 	requireBase: false
-		// });
+		$locationProvider.html5Mode({
+			enabled: true,
+			requireBase: false
+		});
 
 	$locationProvider.hashPrefix('');
 

@@ -2,7 +2,7 @@
 	<h1 class="text-center">Add / Edit contacts list</h1>
 </div>
 <div class="jumbotron text-center">
-	<div class="btn-group" role="group" ng-show="!errMsg"><a class="btn btn-lg btn-info" href="#/list">Go to Contacts list</a></div>
+	<div class="btn-group" role="group" ng-show="!errMsg"><a class="btn btn-lg btn-info" href="/list">Go to Contacts list</a></div>
 	<div class="row show-hide-message" ng-show="errMsg">
 		<div class="alert alert-danger">{{ errMsg }}</div>
 	</div>
@@ -18,16 +18,19 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
+		<!-- <tr>
 			<td colspan="4"></td>
-			<td class="text-center"><button class="btn btn-info show_update" onclick="Updated(this);" ng-click="updateThisContact(contact._id);">Update</button></td>
-		</tr>
+			<td class="text-center"><button class="btn btn-info show_update" onclick="Updated(this);" ng-click="updateContact();">Update</button></td>
+		</tr> -->
 		<tr>
 			<td></td>
 			<td><input class="form-control" ng-model="contact.name"></td>
 			<td><input class="form-control" ng-model="contact.email"></td>
 			<td><input class="form-control" ng-model="contact.number"></td>
-			<td class="text-center"><button class="btn btn-success" ng-click="addContact();">Add Contact</button></td>
+			<td class="text-center">
+				<button ng-show="!showUpdate" class="btn btn-success" ng-click="createContact();">Add Contact</button>
+				<button ng-show="showUpdate" class="btn btn-info show_update" onclick="Updated(this);" ng-click="updateContact();">Update</button>
+			</td>
 		</tr>
 		<tr ng-repeat="(key, contact) in newlistdb">
 			<td>{{key + 1}}</td>

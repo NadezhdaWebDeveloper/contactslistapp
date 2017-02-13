@@ -2,7 +2,7 @@
 	<h1 class="text-center">Contacts list</h1>
 </div>
 <div class="jumbotron text-center">
-	<div class="btn-group" role="group" ng-show="!errMsg"><a class="btn btn-lg btn-success" href="#/form">Add/Edit contacts list</a></div>
+	<div class="btn-group" role="group" ng-show="!errMsg"><a class="btn btn-lg btn-success" href="/form">Add/Edit contacts list</a></div>
 	<div class="row show-hide-message" ng-show="errMsg">
 		<div class="alert alert-danger">{{ errMsg }}</div>
 	</div>
@@ -23,16 +23,26 @@
 			<td><input class="form-control" ng-model="contact.name"></td>
 			<td><input class="form-control" ng-model="contact.email"></td>
 			<td><input class="form-control" ng-model="contact.number"></td>
-			<td><button class="btn btn-success" ng-click="addContact();">Add Contact</button></td>
-			<td><button class="btn btn-info" ng-click="updateContact();">Update</button></td>
+			<td>
+				<button ng-show="!showUpdate" class="btn btn-success" ng-click="createContact();">Add Contact</button>
+				<button ng-show="showUpdate" class="btn btn-info" ng-click="updateContact();">Update</button>
+			</td>
 		</tr>
 		<tr ng-repeat="(key, contact) in contactlist">
 			<td>{{key + 1}}</td>
 			<td>{{contact.name}}</td>
 			<td>{{contact.email}}</td>
 			<td>{{contact.number}}</td>
-			<td><button class="btn btn-danger" ng-click="removeContact(contact._id);">Remove</button></td>
+			<td><button class="btn btn-danger" ng-click="deleteContact(contact._id);">Remove</button></td>
 			<td><button class="btn btn-warning" ng-click="editContact(contact._id);">Edit</button></td>
 		</tr>
+		<!-- <tr ng-repeat="(key, contact) in contactlist">
+			<td>{{key + 1}}</td>
+			<td><input type="text" value="{{ contact.name }}" class="form-control"></td>
+			<td><input type="text" value="{{ contact.email }}" class="form-control"></td>
+			<td><input type="text" value="{{ contact.number }}" class="form-control"></td>
+			<td><button class="btn btn-danger" ng-click="deleteContact(contact._id);">Remove</button></td>
+			<td><button class="btn btn-info" ng-click="updateContact();">Update</button></td>
+		</tr> -->
 	</tbody>
 </table>
