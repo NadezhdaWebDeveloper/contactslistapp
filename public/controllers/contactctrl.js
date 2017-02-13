@@ -89,6 +89,7 @@ angular.module('contactController', [])
 			.deleteContact(id)
 			.then(function successCallback(data) {
 				
+				$scope.showUpdate = false;
 				getContacts();
 				
 			}, function errorCallback(data) {
