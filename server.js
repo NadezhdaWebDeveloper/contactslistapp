@@ -11,7 +11,8 @@ var express 	= require('express'),
 
 // mongodb coonection
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost:27017/spadb', function(err){
+// mongoose.connect('mongodb://localhost:27017/spadb', function(err){
+mongoose.connect('mongodb://nadezhda:qwerty@ds161931.mlab.com:61931/chat', function(err){
 	if (err) {
 		console.log('Not connected to the database: ' + err);
 	} else {
